@@ -6,6 +6,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 @api_view(['GET'])
+def get_test(request):
+    return Response({'message': 'Hello World!'}, status= status.HTTP_200_OK)
+
+
+@api_view(['GET'])
 def get_indicadores_totales(request):
     path = os.path.join(settings.BASE_DIR, r'apps\machine_learning\EDA\dataframe\supermarket_sales_semi_clean.csv')
     data = pd.read_csv(path)
