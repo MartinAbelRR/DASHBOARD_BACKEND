@@ -1,4 +1,5 @@
-#!/usr/bin/env bach
+#!/usr/bin/env bas
+h
 # exit on error
 set -o errexit
 
