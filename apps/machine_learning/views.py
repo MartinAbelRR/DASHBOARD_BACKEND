@@ -25,7 +25,7 @@ def get_indicadores_totales(request):
 
 @api_view(['GET'])
 def get_ventas_mensual(request):
-    path = os.path.join(settings.CSV_FILES_DIR, r'apps\machine_learning\EDA\dataframe\serie_supermarket_sales.csv') # Para Deploy.
+    path = os.path.join(settings.CSV_FILES_DIR, r'serie_supermarket_sales.csv') # Para Deploy.
     data = pd.read_csv(path)
 
 
@@ -48,7 +48,7 @@ def get_ventas_mensual(request):
 
 @api_view(['GET'])
 def get_sucursales_x_ventas(request):    
-    path = os.path.join(settings.CSV_FILES_DIR, r'apps\machine_learning\EDA\dataframe\supermarket_sales_semi_clean.csv') # Para Deploy.
+    path = os.path.join(settings.CSV_FILES_DIR, r'supermarket_sales_semi_clean.csv') # Para Deploy.
     data = pd.read_csv(path)
     
     df_ventas_sucursal = data[['Sucursal', 'Cantidad']].groupby('Sucursal').agg(['count', 'sum', 'mean'])
