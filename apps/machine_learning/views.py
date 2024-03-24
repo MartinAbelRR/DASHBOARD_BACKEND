@@ -12,7 +12,7 @@ def get_test(request):
 
 @api_view(['GET'])
 def get_indicadores_totales(request):
-    path = os.path.join(settings.BASE_DIR, r'apps\machine_learning\migrations\supermarket_sales_semi_clean.csv')
+    path = os.path.join(settings.CSV_FILES_DIR, r'supermarket_sales_semi_clean.csv')
     data = pd.read_csv(path)
 
     dict_indicadores = dict(data[['Total', 'Costo de bienes vendidos', 'Ingreso bruto', 'Cantidad']].sum())
