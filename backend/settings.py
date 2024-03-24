@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from dotenv import load_dotenv
 from pathlib import Path
+import shutil
 import dj_database_url
 import os
 
@@ -75,7 +76,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['static'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,16 +140,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'staticfiles/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# CSV_FILES_DIR = os.path.join(STATIC_ROOT, 'csv_files')                             
-# os.makedirs(CSV_FILES_DIR, exist_ok=True)
+STATIC_URL = 'static/'
 
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    CSV_FILES_DIR = os.path.join(STATIC_ROOT, 'csv_files')                             
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    CSV_FILES_DIR = os.path.join(STATIC_ROOT, 'csv_files')
     os.makedirs(CSV_FILES_DIR, exist_ok= True)
-
+    contenidos = os.listdir(BASE_DIR / 'csv_files')
+    for elemenet in contenidos:
+        shutil.copy(BASE_DIR / 'csv_files' / elemenet, CSV_FILES_DIR)
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
