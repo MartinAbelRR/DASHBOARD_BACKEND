@@ -5,14 +5,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-@api_view(['GET'])
-def get_test(request):
-    return Response({'message': 'Hello World!'}, status= status.HTTP_200_OK)
-
 
 @api_view(['GET'])
 def get_indicadores_totales(request):
-    path = os.path.join(settings.CSV_FILES_DIR, r'supermarket_sales_semi_clean.csv')
+    path = os.path.join(settings.CSV_FILES_DIR, r'supermarket_sales_semi_clean.csv') # Para Deploy.
     data = pd.read_csv(path)
 
     dict_indicadores = dict(data[['Total', 'Costo de bienes vendidos', 'Ingreso bruto', 'Cantidad']].sum())
@@ -29,7 +25,7 @@ def get_indicadores_totales(request):
 
 @api_view(['GET'])
 def get_ventas_mensual(request):
-    path = os.path.join(settings.BASE_DIR, r'apps\machine_learning\EDA\dataframe\serie_supermarket_sales.csv')
+    path = os.path.join(settings.CSV_FILES_DIR, r'apps\machine_learning\EDA\dataframe\serie_supermarket_sales.csv') # Para Deploy.
     data = pd.read_csv(path)
 
 
@@ -52,7 +48,7 @@ def get_ventas_mensual(request):
 
 @api_view(['GET'])
 def get_sucursales_x_ventas(request):    
-    path = os.path.join(settings.BASE_DIR, r'apps\machine_learning\EDA\dataframe\supermarket_sales_semi_clean.csv')
+    path = os.path.join(settings.CSV_FILES_DIR, r'apps\machine_learning\EDA\dataframe\supermarket_sales_semi_clean.csv') # Para Deploy.
     data = pd.read_csv(path)
     
     df_ventas_sucursal = data[['Sucursal', 'Cantidad']].groupby('Sucursal').agg(['count', 'sum', 'mean'])
